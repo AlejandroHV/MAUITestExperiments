@@ -42,17 +42,25 @@ public partial class SignatureControl : ContentView
 
     private void Reset_OnClicked(object? sender, EventArgs e)
     {
-        IsDrawing = false;
-        // signaturePad.Clear();
+        
+        signaturePad.Clear();
     }
     
     private void SaveImage_OnClicked(object? sender, EventArgs e)
     {
         try
         {
-            IsDrawing = true;
-            // var signatureImage = signaturePad.GetImage();
-            //Image.Source = signatureImage;
+         
+            var signatureImage = signaturePad.GetImage();
+            var imageSource = ImageSource.FromFile(signatureImage);
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                if (imageSource != null)
+                {
+                    Image.Source = imageSource;
+                }
+                
+            });
         }
         catch (Exception exception)
         {

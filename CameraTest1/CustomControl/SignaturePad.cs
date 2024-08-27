@@ -6,7 +6,6 @@ using System;
 
 namespace CameraTest1.CustomControl;
 
-
 public class SignaturePad : SKCanvasView
 {
     private SKPath _path = new SKPath();
@@ -17,15 +16,13 @@ public class SignaturePad : SKCanvasView
     {
         EnableTouchEvents = true;
         Touch += OnTouch;
-
     }
-    
+
     private void OnTouch(object? sender, SKTouchEventArgs e)
     {
         if (e.ActionType == SKTouchAction.Pressed)
         {
             _path.MoveTo(e.Location);
-            
         }
         else if (e.ActionType == SKTouchAction.Moved && e.InContact)
         {
@@ -41,7 +38,6 @@ public class SignaturePad : SKCanvasView
         }
 
         e.Handled = true;
-        
     }
 
     protected override void OnPaintSurface(SKPaintSurfaceEventArgs e)
@@ -69,11 +65,13 @@ public class SignaturePad : SKCanvasView
         InvalidateSurface();
     }
 
-    public ImageSource GetImage()
+    public string GetImage()
     {
         try
         {
-            var imageInfo = new SKImageInfo((int)Width, (int)Height);
+            var sigWidth = 500;
+            var sigHeight = 500;
+            var imageInfo = new SKImageInfo(sigWidth, sigHeight);
             using var surface = SKSurface.Create(imageInfo);
             var canvas = surface.Canvas;
 
@@ -91,27 +89,35 @@ public class SignaturePad : SKCanvasView
             canvas.DrawPath(_path, paint);
 
             using var image = surface.Snapshot();
-            using var data = image.Encode(SKEncodedImageFormat.Png, 100);
-           
-            
-            var filePath = Path.Combine("/Users/alejandroherreno/CameraTest1/Resources/Images/", "filename.png");
+            using var data = image.Encode(SKEncodedImageFormat.Png, 250);
+
+
+            var filePath = Path.Combine(FileSystem.AppDataDirectory, "signature.png");
             if (File.Exists(filePath))
             {
                 File.Delete(filePath);
             }
+
             using (var stream = File.OpenWrite(filePath))
             {
-                
                 data.SaveTo(stream);
             }
-            
-            return  ImageSource.FromStream(() => new MemoryStream(data.ToArray()));
+
+            return filePath;
+/*
+            var imageStream = data.AsStream();
+            imageStream.Position = 0; // Ensure the stream is at the beginning
+            if (imageStream != null && imageStream.Length > 0)
+            {
+                return ImageSource.FromStream(() => imageStream);
+            }
+*/
+            throw new InvalidOperationException("The image stream is empty or null.");
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
             throw;
         }
-        
     }
 }
