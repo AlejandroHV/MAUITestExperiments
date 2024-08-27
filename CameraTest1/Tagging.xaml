@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:CameraTest1.Models"
+             x:Class="CameraTest1.Tagging"
+             x:DataType="vm:TaggingViewModel">
+    <ContentPage.Content>
+        <VerticalStackLayout>
+            <Label Text="Tagging" TextColor="White"></Label>
+            <Image Source="{Binding CurrentImage}"></Image>
+            <CollectionView ItemsSource="{Binding Images}" >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border HeightRequest="80" WidthRequest="80">
+                            <Image Source="{Binding .}" Aspect="AspectFill"></Image>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                
+            </CollectionView>
+            <Button Text="Retake" Clicked="Button_OnClicked">
+                
+            </Button>
+        </VerticalStackLayout>
+    </ContentPage.Content>
+</ContentPage>

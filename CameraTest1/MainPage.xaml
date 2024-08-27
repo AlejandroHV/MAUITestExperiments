@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:models="clr-namespace:CameraTest1.Models"
+             xmlns:main="clr-namespace:CameraTest1"
+             xmlns:custom="clr-namespace:CameraTest1.CustomControl"
+             xmlns:dxcv="clr-namespace:DevExpress.Maui.CollectionView;assembly=DevExpress.Maui.CollectionView"
+             x:Class="CameraTest1.MainPage">
+    <ContentPage.Content>
+
+        <custom:ToggleScrollCollectionView IsScrollEnabled="{Binding IsDrawing}" ItemsSource="{Binding CollectionItems}" InputTransparent="{Binding IsDrawing}"  >
+            <dxcv:DXCollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Items">
+                   
+                     <main:SignatureControl BindingContext="." IsDrawing="{Binding Source={x:RelativeSource AncestorType={x:Type  main:MainPage}} ,Path= IsDrawing ,Mode=TwoWay}"></main:SignatureControl>
+                </DataTemplate>
+            </dxcv:DXCollectionView.ItemTemplate>
+        </custom:ToggleScrollCollectionView>
+
+
+    </ContentPage.Content>
+
+    <!-- <ScrollView>
+        
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+            <Image
+                Source="dotnet_bot.png"
+                HeightRequest="185"
+                Aspect="AspectFit"
+                SemanticProperties.Description="dot net bot in a race car number eight" />
+
+            <Label
+                Text="Hello, World!"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1" />
+
+           
+
+            <Button
+                x:Name="CounterBtn"
+                Text="Navigate To Camera" 
+                SemanticProperties.Hint="Counts the number of times you click"
+                Clicked="OnCounterClicked"
+                HorizontalOptions="Fill" />
+        </VerticalStackLayout>
+    </ScrollView>
+-->
+</ContentPage>
