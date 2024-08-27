@@ -42,14 +42,16 @@ public partial class SignatureControl : ContentView
 
     private void Reset_OnClicked(object? sender, EventArgs e)
     {
-        signaturePad.Clear();
+        IsDrawing = false;
+        // signaturePad.Clear();
     }
     
     private void SaveImage_OnClicked(object? sender, EventArgs e)
     {
         try
         {
-            var signatureImage = signaturePad.GetImage();
+            IsDrawing = true;
+            // var signatureImage = signaturePad.GetImage();
             //Image.Source = signatureImage;
         }
         catch (Exception exception)
@@ -67,11 +69,11 @@ public partial class SignatureControl : ContentView
 
     private void SignaturePad_OnOnInteracting(object? sender, EventArgs e)
     {
-        IsDrawing = true;
+        IsDrawing = false;
     }
 
     private void SignaturePad_OnOnReleasing(object? sender, EventArgs e)
     {
-        IsDrawing = false;
+        IsDrawing = true;
     }
 }

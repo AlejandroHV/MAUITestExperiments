@@ -13,7 +13,7 @@ public partial class MainPage : ContentPage
 	
 	private List<Items> _collectionItems =  new List<Items>() { new Items { Id = 1, Name = "Alej" }, new Items { Id = 2, Name = "Pere" } };
 
-	private bool _isDrawing;
+	private bool _isDrawing = true;
 
 
 	public bool IsDrawing
