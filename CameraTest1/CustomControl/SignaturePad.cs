@@ -23,12 +23,14 @@ public class SignaturePad : SKCanvasView
         if (e.ActionType == SKTouchAction.Pressed)
         {
             _path.MoveTo(e.Location);
+            OnInteracting?.Invoke(this, EventArgs.Empty);
         }
         else if (e.ActionType == SKTouchAction.Moved && e.InContact)
         {
             _path.LineTo(e.Location);
+            
             InvalidateSurface();
-            OnInteracting?.Invoke(this, EventArgs.Empty);
+            
         }
         else if (e.ActionType == SKTouchAction.Released)
         {

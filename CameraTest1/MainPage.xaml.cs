@@ -13,16 +13,16 @@ public partial class MainPage : ContentPage
 	
 	private List<Items> _collectionItems =  new List<Items>() { new Items { Id = 1, Name = "Alej" }, new Items { Id = 2, Name = "Pere" }, new Items { Id = 3, Name = "Pere" }  };
 
-	private bool _isDrawing = true;
+	private bool _isScrollingEnabled = true;
 
 
-	public bool IsDrawing
+	public bool IsScrollingEnabled
 	{
-		get  => _isDrawing;
+		get  => _isScrollingEnabled;
 		set
 		{
-			_isDrawing = value;
-			OnPropertyChanged(nameof(IsDrawing)); 
+			_isScrollingEnabled = value;
+			OnPropertyChanged(nameof(IsScrollingEnabled)); 
 		} 
 	}
 	public List<Items> CollectionItems

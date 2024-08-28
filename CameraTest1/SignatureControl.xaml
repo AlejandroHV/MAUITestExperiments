@@ -10,19 +10,29 @@
     <ContentView.Content>
         <Border StrokeThickness="2" Stroke="Black" Margin="0,5">
             <Grid RowDefinitions="*,*,Auto,Auto,Auto">
-               
-                <Border StrokeThickness="2" Stroke="Black"  Grid.Row="0" >
-                    <custom:SignaturePad x:Name="signaturePad" OnReleasing="SignaturePad_OnOnReleasing" OnInteracting="SignaturePad_OnOnInteracting" HeightRequest="150" WidthRequest="300" />
-                </Border>
-                <Border  StrokeThickness="2" Stroke="Black"  Grid.Row="1">
-                    <Image Source="filename.png" x:Name="Image" HeightRequest="100" WidthRequest="350"  Aspect="Fill" />
+
+                <Border StrokeThickness="2" Stroke="Black" Grid.Row="0">
+
+
+                    <custom:SignaturePad x:Name="signaturePad"
+                                         OnReleasing="SignaturePad_OnOnReleasing"
+                                         OnInteracting="SignaturePad_OnOnInteracting" HeightRequest="150"
+                                         WidthRequest="300" />
+
 
                 </Border>
-               <Button Clicked="Reset_OnClicked" Grid.Row="2" Text="Clear"></Button>
-                <Button Clicked="SaveImage_OnClicked" Grid.Row="3" Text="Save" ></Button>
-                <Label Grid.Row="4" Text="{Binding Id}"  IsVisible="{Binding Source={x:RelativeSource AncestorType={x:Type  main:MainPage}} ,Path= IsDrawing ,Mode=TwoWay}"></Label>
+
+                <Image Source="filename.png" x:Name="Image" Grid.Row="1" HeightRequest="100" WidthRequest="350"
+                       Aspect="Fill" />
+
+
+                <Button Clicked="Reset_OnClicked" Grid.Row="2" Text="Clear"></Button>
+                <Button Clicked="SaveImage_OnClicked" Grid.Row="3" Text="Save"></Button>
+                <Label Grid.Row="4" Text="{Binding Id}"
+                       IsVisible="{Binding Source={x:RelativeSource AncestorType={x:Type  main:MainPage}} ,Path= IsDrawing ,Mode=TwoWay}">
+                </Label>
             </Grid>
         </Border>
     </ContentView.Content>
-    
+
 </ContentView>
