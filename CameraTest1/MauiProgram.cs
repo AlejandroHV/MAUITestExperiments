@@ -1,11 +1,18 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CameraTest1.Effect;
+using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
 using DevExpress.Maui;
 using DevExpress.Maui.CollectionView;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 #if IOS
-using CameraTest1.IOS;
+using  CameraTest1.IOS;
+#elif ANDROID
+using  CameraTest1.Android;
+#else
+using CameraTest1.PlatformEffects;
 #endif
+
+
 
 namespace CameraTest1;
 
@@ -30,6 +37,11 @@ public static class MauiProgram
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
+		
+		builder.ConfigureEffects(effects =>
+		{
+			effects.Add<NoDelayTouchEffect, NoDelayTouchPlatformEffect>();
+		});
 		
 		#if IOS
 		builder.ConfigureMauiHandlers(handlers =>

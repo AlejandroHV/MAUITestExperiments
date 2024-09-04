@@ -1,8 +1,6 @@
 using SkiaSharp;
 using SkiaSharp.Views.Maui.Controls;
-using Microsoft.Maui.Controls;
 using SkiaSharp.Views.Maui;
-using System;
 
 namespace CameraTest1.CustomControl;
 
@@ -106,15 +104,7 @@ public class SignaturePad : SKCanvasView
             }
 
             return filePath;
-/*
-            var imageStream = data.AsStream();
-            imageStream.Position = 0; // Ensure the stream is at the beginning
-            if (imageStream != null && imageStream.Length > 0)
-            {
-                return ImageSource.FromStream(() => imageStream);
-            }
-*/
-            throw new InvalidOperationException("The image stream is empty or null.");
+
         }
         catch (Exception e)
         {
